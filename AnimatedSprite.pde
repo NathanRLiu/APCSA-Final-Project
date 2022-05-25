@@ -6,6 +6,7 @@ public class AnimatedSprite extends Sprite{
   int direction;
   int index;
   int frame;
+  boolean pause;
   // implement the constructor, remember to call super() appropriately.
   // initialize direction, index and frame. The PImage arrays can be initialized
   // as null. 
@@ -14,6 +15,7 @@ public class AnimatedSprite extends Sprite{
     
     super(img, scale);
     
+    pause = false;
     direction = NEUTRAL_FACING;
     index = 0;
     frame = 0;
@@ -32,11 +34,6 @@ public class AnimatedSprite extends Sprite{
     advanceToNextImage();
   }
   
-  
-  
-  
-  
-  
   }
   // if sprite is moving right, set direction to RIGHT_FACING
   // else if it is moving left, set direction to LEFT_FACING
@@ -45,9 +42,7 @@ public class AnimatedSprite extends Sprite{
     if(change_x > 0)
       direction = RIGHT_FACING;
     else if(change_x < 0)
-      direction = LEFT_FACING;    
-    else
-      direction = NEUTRAL_FACING;  
+      direction = LEFT_FACING;
   }
 
   // if direction is RIGHT_FACING, LEFT_FACING or NEUTRAL_FACING
@@ -57,15 +52,13 @@ public class AnimatedSprite extends Sprite{
       currentImages = moveRight;
     else if(direction == LEFT_FACING)
       currentImages = moveLeft;
-    else
-      currentImages = standNeutral;
   }
   public void advanceToNextImage(){
     // TODO:
     // increase index by 1
     // if index is at end of array loop back to 0
     // assign image variable(from Sprite class) to currentImages at index.
-
+    if (pause) return;
     index++;
     if (index >= currentImages.length)
       index = 0;
