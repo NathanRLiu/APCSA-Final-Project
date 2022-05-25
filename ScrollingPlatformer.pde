@@ -5,6 +5,7 @@ final static float SPRITE_SCALE = 50.0 / 128;
 final static float SPRITE_SIZE = 50;
 final static float GRAVITY = 0.6;
 final static float JUMP_SPEED = 12;
+final static int reactTime = 0;
 
 final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 200;
@@ -322,7 +323,7 @@ ArrayList<Enemy> checkCollisionEnemy(Sprite sprite, ArrayList<Enemy> list)
     }
     if (p.direction == LEFT_FACING && player.getRight() > p.getLeft() - shootDistance - 10 && player.getLeft() < p.center_x){
       if (!currentlyShooting.contains(p)){
-        if (!shotTracker.containsKey(frame + 30)){
+        if (!shotTracker.containsKey(frame + reactTime)){
           ArrayList<Enemy> hanHan = new ArrayList();
           hanHan.add(p);
           currentlyShooting.add(p);
