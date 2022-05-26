@@ -5,9 +5,9 @@ final static float SPRITE_SCALE = 50.0 / 128;
 final static float SPRITE_SIZE = 50;
 final static float GRAVITY = 0.6;
 final static float JUMP_SPEED = 12;
-final static int reactTime = 0;
+final static int reactTime = 15;
 
-final static float RIGHT_MARGIN = 400;
+final static float RIGHT_MARGIN = 600;
 final static float LEFT_MARGIN = 200;
 final static float VERTICAL_MARGIN = 40;
 
@@ -23,7 +23,7 @@ Player player;
 SoundFile killSound;
 SoundFile vampAnthem;
 SoundFile sheriffSound;
-PImage snow, crate, red_brick, brown_brick, gold, omen, playerImage, brick;
+PImage snow, crate, red_brick, brown_brick, gold, omen, playerImage, brick, bg;
 ArrayList<Sprite> platforms;
 ArrayList<Sprite> coins;
 ArrayList<Enemy> enemies;
@@ -41,7 +41,7 @@ float view_x, view_y;
 
 void setup()
 {
-  size(800, 600);
+  size(1000, 600);
   imageMode(CENTER);
   
   System.out.println("arnav look kinda thicc rn");
@@ -70,7 +70,7 @@ void setup()
   
   coins = new ArrayList<Sprite>();
   numCoins = 0;
-  shootDistance = 200;
+  shootDistance = 400;
   isGameOver = false;
   lastRespawnFrame = 0;
   
@@ -80,6 +80,7 @@ void setup()
   
   view_x = 0;
   view_y = 0;
+  bg = loadImage("background.jpg");
 }
 
 void draw()
@@ -327,14 +328,14 @@ ArrayList<Enemy> checkCollisionEnemy(Sprite sprite, ArrayList<Enemy> list)
           ArrayList<Enemy> hanHan = new ArrayList();
           hanHan.add(p);
           currentlyShooting.add(p);
-          shotTracker.put(frame+30, hanHan);
+          shotTracker.put(frame+reactTime, hanHan);
           p.pause = true;
           p.change_x = 0;
         }else{
-          ArrayList<Enemy> hanHan = shotTracker.get(frame+30);
+          ArrayList<Enemy> hanHan = shotTracker.get(frame + reactTime);
           hanHan.add(p);
           currentlyShooting.add(p);
-          shotTracker.put(frame+30, hanHan);
+          shotTracker.put(frame+reactTime, hanHan);
           p.pause = true;
           p.change_x = 0;
         }
